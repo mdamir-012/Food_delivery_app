@@ -2,7 +2,7 @@
 import "./ExploreMenu.css";
 import { menu_list } from "../../assets/frontend_assets/assets";
 
-const ExploreMenu = () => {
+const ExploreMenu = ({category,setCategory}) => {
   return (
     <div className="explore_menu" id="explore_menu_id">
       <h1>Explore our menu</h1>
@@ -14,8 +14,8 @@ const ExploreMenu = () => {
       </p>
       <div className="explore_menu_list">
         {menu_list.map((elem, i) => (
-          <div className="explore_menu_list_item" key={i}>
-            <img src={elem.menu_image} alt="" />
+          <div onClick={()=>setCategory(prev=>prev===elem.menu_name?"All":elem.menu_name)} className="explore_menu_list_item" key={i}>
+            <img className={category===elem.menu_name?"active":"" } src={elem.menu_image} alt="" />
             <p>{elem.menu_name}</p>
           </div>
         ))}
