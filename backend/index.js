@@ -2,6 +2,7 @@ const express=require("express");
 const cors=require("cors");
 const {connection} = require("./config/db.js");
 const { foodRouter } = require("./routes/foodRoute.js");
+const { userRouter } = require("./routes/userRoute.js");
 
 
 // app config
@@ -16,7 +17,8 @@ app.use(cors());
 // dB connection
 
 app.use("/api/food",foodRouter)
-
+// app.use("/images",express.static("uploads"))
+app.use("/api/user",userRouter)
 app.get("/",(req,res)=>{
     res.send("API Working")
 
@@ -25,7 +27,8 @@ app.get("/",(req,res)=>{
 
 app.listen(port,async()=>{
     try{
-        await connection
+        await connection;
+        console.log("connected to mongoDB")
         console.log(`listening on port ${port}`);
     }
     catch(err){
